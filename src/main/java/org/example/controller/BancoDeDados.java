@@ -13,9 +13,9 @@ public class BancoDeDados {
 
     }
 
-    public void cadastrar(Item item) {
+    public void cadastrar(Item item, boolean opcao) {
         try {
-            OutputStream os = new FileOutputStream("medicamentos.txt", true);
+            OutputStream os = new FileOutputStream("medicamentos.txt", opcao);
             OutputStreamWriter osw = new OutputStreamWriter(os);
             BufferedWriter bw = new BufferedWriter(osw);
 
@@ -37,16 +37,44 @@ public class BancoDeDados {
 
     }
 
-    public void editar(int codigo) {
+    public void editar(int codigo, ArrayList<Item> itens) {
+        Item item = itens.get(codigo);
+        itens.remove(codigo);
+        item.setNome("Tilenol 200ml XPSKT2");
+        item.setQuantidade(300);
+        item.setTipo("Frasco de 200ml");
+
+        itens.add(codigo, item);
+
+        for (int i=0; i< itens.size(); i++) {
+            if (i == 0) {
+                cadastrar(itens.get(i), false);
+            } else {
+                cadastrar(itens.get(i), true);
+            }
+        }
+    }
+
+    public Item pesquisar(int codigo, ArrayList<Item> itens) {
+        try {
+            Item item = itens.get(codigo);
+            return item;
+        }catch (Exception e) {
+            return null;
+        }
 
     }
 
-    public void pesquisar(int codigo) {
+    public void excluir(int codigo, ArrayList<Item> itens) {
+        itens.remove(codigo);
 
-    }
-
-    public void excluir(int codigo) {
-
+        for (int i=0; i<itens.size(); i++) {
+            if (i == 0){
+            cadastrar(itens.get(i), false);
+            } else {
+                cadastrar(itens.get(i), true);
+            }
+        }
     }
 
     public ArrayList<Item> ler() {

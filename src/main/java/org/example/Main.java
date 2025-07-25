@@ -13,10 +13,7 @@ public class Main {
         BancoDeDados banco = new BancoDeDados();
         ArrayList<Item> itens = banco.ler();
 
-        for (int i=0; i<itens.size(); i++) {
-            System.out.println("Codigo: "+i+" - Nome: "+itens.get(i).getNome()+", Quantidade: "+itens.get(i).getQuantidade()+" - Tipo: "+itens.get(i).getTipo());
-            
-        }
+        banco.editar( 1, itens);
 
     }
 }
