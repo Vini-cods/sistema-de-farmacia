@@ -1,19 +1,20 @@
 package org.example;
 
-import org.example.controller.BancoDeDados;
-import org.example.model.Item;
+import org.example.view.FarmaciaGUI;
 
-import java.util.ArrayList;
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Sistema de Farmácia");
+        System.out.println("Iniciando Sistema de Farmácia...");
 
+        // Inicia a interface gráfica
+        SwingUtilities.invokeLater(() -> {
+            FarmaciaGUI gui = new FarmaciaGUI();
+            gui.setVisible(true);
+        });
 
-        BancoDeDados banco = new BancoDeDados();
-        ArrayList<Item> itens = banco.ler();
-
-        banco.editar( 1, itens);
-
+        // Mantém o console ativo para logs adicionais se necessário
+        System.out.println("Sistema em execução. Use a interface gráfica para interagir.");
     }
 }
